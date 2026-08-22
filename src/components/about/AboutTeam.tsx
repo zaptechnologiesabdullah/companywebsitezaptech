@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Linkedin, Twitter, Globe, ChevronDown, ChevronUp, Users, Quote, ArrowRight } from "lucide-react";
+import { Linkedin, Twitter, Globe, ChevronDown, ChevronUp, Users, Quote, ArrowRight, BadgeCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import teamAbdullah from "@/assets/team-abdullah.png";
 import teamKamran from "@/assets/team-kamran.png";
 import teamHasnain from "@/assets/team-hasnain.png";
 import teamSalman from "@/assets/team-salman.png";
+import teamFaisal from "@/assets/team-faisal.jpeg";
+import teamArslan from "@/assets/team-arslan.jpeg";
 
 const team = [
   {
@@ -15,6 +17,7 @@ const team = [
     photo: teamAbdullah,
     bio: "Abdullah leads Zap Technologies with a vision for innovative solutions and customer-focused strategies. He has built the company from the ground up, driving growth through strategic leadership, technical expertise, and a deep understanding of the digital landscape.",
     socials: { linkedin: "#", twitter: "#" },
+    isFounder: true,
   },
   {
     name: "Muhammad Kamran Khan",
@@ -23,6 +26,7 @@ const team = [
     photo: teamKamran,
     bio: "Kamran drives brand growth and digital marketing strategies at Zap Technologies. With a sharp eye for market trends and consumer behavior, he crafts compelling campaigns that connect audiences with our innovative solutions.",
     socials: { linkedin: "#" },
+    isFounder: false,
   },
   {
     name: "Muhammad Hasnain",
@@ -31,6 +35,7 @@ const team = [
     photo: teamHasnain,
     bio: "Hasnain specializes in cross-platform mobile app development using Flutter and Dart. With a keen eye for smooth UI/UX and performance optimization, he builds beautiful, high-performance mobile applications for both iOS and Android platforms.",
     socials: { linkedin: "#" },
+    isFounder: false,
   },
   {
     name: "Muhammad Salman",
@@ -39,6 +44,25 @@ const team = [
     photo: teamSalman,
     bio: "Salman is a skilled front-end developer with expertise in modern JavaScript frameworks and responsive design. He transforms creative designs into pixel-perfect, interactive web experiences with clean, maintainable code and attention to detail.",
     socials: { linkedin: "#" },
+    isFounder: false,
+  },
+  {
+    name: "Muhammad Faisal",
+    role: "Backend Developer",
+    initials: "FA",
+    photo: teamFaisal,
+    bio: "Faisal is a backend developer with expertise in building scalable AI SaaS products. He designs robust APIs, manages databases, and integrates advanced AI models to power smart, seamless software solutions.",
+    socials: { linkedin: "#" },
+    isFounder: false,
+  },
+  {
+    name: "Muhammad Arsalan",
+    role: "Front-End Developer & Tester",
+    initials: "AR",
+    photo: teamArslan,
+    bio: "Arsalan is a front-end developer and QA tester who crafts intuitive user interfaces and ensures rigorous product testing. He is committed to delivering responsive, high-performance, and bug-free web applications.",
+    socials: { linkedin: "#" },
+    isFounder: false,
   },
 ];
 
@@ -66,7 +90,14 @@ const TeamCard = ({ member, index }: { member: typeof team[0]; index: number }) 
         </div>
       )}
 
-      <h3 className="font-bold text-foreground text-lg mb-1">{member.name}</h3>
+      <h3 className="font-bold text-foreground text-lg mb-1 flex items-center justify-center gap-1.5">
+        {member.name}
+        {member.isFounder ? (
+          <BadgeCheck className="w-5 h-5 text-blue-500 fill-blue-500/10 flex-shrink-0" />
+        ) : (
+          <BadgeCheck className="w-5 h-5 text-green-500 fill-green-500/10 flex-shrink-0" />
+        )}
+      </h3>
       <p className="text-sm text-primary font-semibold mb-4">{member.role}</p>
 
       <p className="text-sm text-muted-foreground leading-relaxed mb-2">
@@ -149,7 +180,7 @@ const AboutTeam = () => {
         </motion.div>
 
         {/* Team cards grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {team.map((member, i) => (
             <TeamCard key={member.name} member={member} index={i} />
           ))}
